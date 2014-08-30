@@ -67,7 +67,7 @@
 14.查看远程库的信息：git remote或git remote -v
 15.推送信息到远程分支：git push origin master(git push 远程分子名 本地分支名)
 16.获取远程分支信息：git clone xxx(远程分支的地址)
-17.如果抓取远程分支信息出现冲突，需先采用指令：git pull抓取下来后手动合并后再推送上去
+17.如果抓取远程分支信息出现冲突，需先采用指令：git pull,抓取下来后手动合并后再推送上去
   (git pull也失败了，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：$ git branch --set-upstream dev origin/dev)
   
 五、标签管理
