@@ -1,0 +1,41 @@
+{
+  "name": "yxspider",
+  "main": "index.js",
+  "description": "The JavaScript Task Runner",
+  "version": "0.0.1",
+  "author": {
+    "name": "Yang Xun",
+    "url": "http://qxlove.vicp.net"
+  },
+  /*"homepage": "http://qxlove.vicp.net",
+  "repository": {
+    "type": "git",
+    "url": "git://qxlove.vicp.net"
+  },
+  "bugs": {
+    "url": "http://qxlove.vicp.net"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://qxlove.vicp.net"
+    }
+  ],*/
+  "scripts": {
+    "test": "app index"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "keywords": [
+    "spider"
+  ],
+  "dependencies": {
+    "async": "~0.1.22"
+  },
+  "devDependencies": {
+      "yxphantomjs": "~0.1.0"
+  },
+  "readme": "this is a net spider",
+  "readmeFilename": "README.md"
+}

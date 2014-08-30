@@ -1,0 +1,11 @@
+{
+    "name": "yxphantomjs",
+    "description": "pull data from net",
+    "main": "./index",
+    "author": {
+        "name": "yangxun"
+    },
+    "version": "0.1.0",
+    "devDependencies": {
+    }
+}
