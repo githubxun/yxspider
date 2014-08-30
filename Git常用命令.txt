@@ -9,7 +9,7 @@
 1.选择合适的目录（最好是空目录，且无中文路径）
 2.git init
 3.添加文件：git add xxxx
-4.提交：git commit -m 'note'(第一次提交)
+4.提交：git commit -m 'note'
 
 
 三、时光机穿梭
