@@ -1,0 +1,13 @@
+一、安装
+
+1.安装成功后运行->Git Bash，弹出类似命令行的窗口，表示安装成功了
+2.配置名字和email：
+	git config --global user.name 'xxx'
+	git config --global user.email 'xxx'
+
+二、创建版本库
+
+1.选择合适的目录（最好是空目录，且无中文路径）
+2.git init
+3.添加文件：git add xxxx
+4.提交：git commit -m 'note'(第一次提交)
