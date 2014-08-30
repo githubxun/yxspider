@@ -11,3 +11,9 @@
 2.git init
 3.添加文件：git add xxxx
 4.提交：git commit -m 'note'(第一次提交)
+
+三、时光机穿梭
+
+1.查看当前工作区的状态：git status
+2.查看具体的修改详情：git diff filename
+3.
