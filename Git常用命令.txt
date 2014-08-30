@@ -125,6 +125,7 @@ git config --global alias.br branch
 7.获取远程分支：git checkout -b local-branchname origin/remote_branchname  就可以将远程分支
 
 
+
   
   
   
