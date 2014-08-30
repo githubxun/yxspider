@@ -16,4 +16,7 @@
 
 1.查看当前工作区的状态：git status
 2.查看具体的修改详情：git diff filename
-3.
+3.查看提交的日志：git log/git log --pretty=onelone(查看commit id)
+4.版本回退：git reset --hard HEAD^^(HEAD~2)
+5.回退到指定的版本：git reset --hard commit id
+  （另一种查看commit id的方法：git reflog）
