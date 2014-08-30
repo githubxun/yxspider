@@ -1,22 +1,110 @@
 一、安装
-
 1.安装成功后运行->Git Bash，弹出类似命令行的窗口，表示安装成功了
 2.配置名字和email：
 	git config --global user.name 'xxx'
 	git config --global user.email 'xxx'
 
+	
 二、创建版本库
-
 1.选择合适的目录（最好是空目录，且无中文路径）
 2.git init
 3.添加文件：git add xxxx
 4.提交：git commit -m 'note'(第一次提交)
 
-三、时光机穿梭
 
+三、时光机穿梭
 1.查看当前工作区的状态：git status
 2.查看具体的修改详情：git diff filename
 3.查看提交的日志：git log/git log --pretty=onelone(查看commit id)
 4.版本回退：git reset --hard HEAD^^(HEAD~2)
 5.回退到指定的版本：git reset --hard commit id
   （另一种查看commit id的方法：git reflog）
+6.补充git的几个重要概念：工作区、版本库（暂存区、分支）
+7.撤销修改：git checkout --filename（--很重要，如果没有就变成（切换到/创建）？一个新的分支了）
+  撤销有两种情况：
+  一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+  一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+  总之，就是让这个文件回到最近一次git commit或git add时的状态。
+8.撤销暂存区的修改：git reset HEAD filename(该指令集合回退版本，也可把暂存区的修改删除)
+  如果需要修改已经提交到了版本库，需要采用版本回退的方法修改
+9.删除文件：git rm filename
+
+
+三、远程仓库（github）
+1.在主目录下创建SSH Key：ssh-keygen -trsa -C 'your eamil'
+  (如果一切顺利的话，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人)
+2.登录GitHub打开“Account settings”，“SSH Keys”页面：点“Add SSH Key”，填上任意Title，在Key文本框里粘贴id_rsa.pub文件的内容
+3.在GitHub上创建远程仓库：
+  登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库：
+  在Repository name填入learngit，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓
+4.把本地的仓库与远程的仓库相关联：git remote add origin xxx(git address)
+  关联后把本地的内容推送到远程库上：git push -u origin master(由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。)
+5.从远程库中克隆：git clone xxx(git地址)，克隆完后就可以自行操作了  
+6.Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议
+  某些只开放http端口的公司内部就无法使用ssh协议而只能用https
+7.在本地创建和远程分支对应的分支：git checkout -b branch-name origin/branch-name
+  
+  
+四、分支管理
+1.创建并切换到分支的指令：git checkout -b branchname(相当于两条指令：git branch branchname,git checkout branchname)
+2.查看分支指令：git branch
+3.切换分支指令：git checkout branchname
+4.合并分支到当前分支指令：git merge branchname
+5.删除分支指令：git branch -d branchname
+  强制删除分支指令：git branch -D branchname
+6.当出现冲突时，需要手动合并后add、commit
+7.查看分支合并情况指令：git log --graph --pretty=oneline --abbrev-commit
+8.查看分支合并图：git log --graph
+9.禁止使用'Fast forward'模式合并指令：git merge --no-ff -m 'log' branchname
+10.分支策略：首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+  那在哪干活呢？干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+  你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+11.把工作现场‘隐藏’起来指令：git stash
+12.查看临时保存的工作现场：git stash list
+  恢复隐藏的工作区：git stash apply（恢复后stash不会删除，需要使用：gitstash drop来删除）
+  另一种恢复隐藏工作区指令：git stash pop(恢复stash后删除该stash)
+13.可以多次stash，恢复的时候先用git stash list查看，然后恢复指定的stash，用指令：git stash apply stash@{0}
+14.查看远程库的信息：git remote或git remote -v
+15.推送信息到远程分支：git push origin master(git push 远程分子名 本地分支名)
+16.获取远程分支信息：git clone xxx(远程分支的地址)
+17.如果抓取远程分支信息出现冲突，需先采用指令：git pull抓取下来后手动合并后再推送上去
+  (git pull也失败了，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：$ git branch --set-upstream dev origin/dev)
+  
+五、标签管理
+1.打标签指令：git tag v1.0
+2.查看所有标签：git tag
+3.查看历史提交的commit id指令：git log --pretty=oneline --abbrev-commit
+4.为对应的commit id打标签指令：git tag v1.0 commit_id
+5.打标签是添加说明文字：git tag -a v1.0 -m 'log' commit_id
+6.查看标签说明文字：git show v1.0
+7.还可以通过-s私钥签名：git tag -s v1.0 -m "log" commit_id
+8.删除标签：git tag -d v1.0
+9.把标签推送到远程库：git push origin v1.0
+  一次性推送全部未推送的本地标签：git push origin --tags
+
+  
+六、忽略特殊文件
+1.在Git工作区的根目录下创建一个特殊的.gitignore文件，然后把要忽略的文件名填进去，Git就会自动忽略这些文件。
+
+
+七、配置别名
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.br branch
+.
+.
+.
+
+
+八、搭建Git服务器  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
